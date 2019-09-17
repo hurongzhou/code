@@ -21,8 +21,31 @@ public class ArrayCode<D> {
     public static void main(String[] args) {
         int[][] array={{1,2,5,7},{3,4,8,11}};
         int[] a={3,4,5,6,7,8,9,1,2};
+        int[] values={1,2,5,10};
         reOrderArray(a);
-        System.out.println(JSON.toJSONString(a));
+        System.out.println(minCoin(values,7));
+    }
+
+    public static int minCoin(int[] values,int target){
+        int n=values.length;
+        //use[i]表示面值为i找回最少的硬币数
+        int[] use=new int[n+1];
+        use[0]=0;
+        for (int i=1;i<=target;i++){
+            int minUse=i;
+            for (int j=0;j<n;j++){
+                if (values[j]<=i){
+                    int tmp=use[i-values[j]];
+                    if (tmp<minUse){
+                        minUse=tmp;
+                    }
+                }else {
+                    break;
+                }
+            }
+            use[i]=minUse;
+        }
+        return use[n];
     }
 
     /**

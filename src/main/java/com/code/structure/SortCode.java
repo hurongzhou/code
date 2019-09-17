@@ -12,11 +12,17 @@ import java.util.Set;
 public class SortCode {
 
     public static void main(String[] args) {
-        int[] a={3,5,2,1,9,4,6};
-        quickSort(a,0,a.length-1);
-        HashSet<String> set=new HashSet();
-        set.add("aa");
+        int[] a=new int[10000];
+        for (int i=1;i<=10000;i++){
+            a[i-1]= (int) (Math.random()*50000);
+        }
         System.out.println(JSON.toJSONString(a));
+//        int[] a={3,5,2,1,9,4,6,11,15,21,15,100,5,26,76,32,16,35};
+        long start=System.currentTimeMillis();
+        heapSort(a);
+        System.out.println(JSON.toJSONString(a));
+        long end=System.currentTimeMillis();
+        System.out.println("排序耗时："+(end-start)+"ms");
     }
 
     /**
@@ -80,6 +86,12 @@ public class SortCode {
         }
     }
 
+    /**
+     * 快速排序
+     * @param array
+     * @param left
+     * @param right
+     */
     public static void quickSort(int[] array,int left,int right){
         if (array==null||array.length==1){
             return;
@@ -106,5 +118,41 @@ public class SortCode {
         array[left]=key;
         return left;
     }
+
+
+    /**
+     * 堆排序
+     * @param array
+     */
+    public static void heapSort(int[] array){
+        int len=array.length;
+        for (int i=len/2;i>=0;i--){
+            buildHeap(array,i,len);
+        }
+        for (int j=len-1;j>=0;j--){
+            swap(array,0,j);
+            buildHeap(array,0,j);
+        }
+    }
+
+    public static void buildHeap(int[] array,int index,int len){
+        int root=index;
+        for (int left=2*root+1;left<len;left=2*left+1){
+            if ((left+1)<len&&array[left+1]>array[left]){
+                left=left+1;
+            }
+            if (array[root]<array[left]){
+                swap(array,root,left);
+            }
+            root=left;
+        }
+    }
+
+    public static void swap(int[] array,int i,int j){
+        int tem=array[i];
+        array[i]=array[j];
+        array[j]=tem;
+    }
+
 
 }

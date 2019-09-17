@@ -15,10 +15,6 @@ public class FindCode {
     public static void main(String[] args) {
         Node node=new Node();
         node.setS("Df");
-        ArrayCode<Node> arrayCode=new ArrayCode<>();
-        arrayCode.setObject(node);
-
-        System.out.println(arrayCode.getObject().getS());
     }
 
 

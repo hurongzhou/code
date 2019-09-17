@@ -11,15 +11,7 @@ import java.util.Stack;
 public class QueueCode {
 
     public static void main(String[] args) {
-        Stack<Integer> stack=new Stack<>();
-        stack.push(1);
-        stack.push(2);
-        stack.push(3);
-        stack.push(4);
-        QueueCode queueCode=new QueueCode(stack);
-        queueCode.push(6);
-        System.out.println(queueCode.pop());
-        System.out.println(JSON.toJSONString(queueCode.stack1));
+
     }
 
     private Stack<Integer> stack1=new Stack<>();
